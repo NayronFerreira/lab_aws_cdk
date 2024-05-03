@@ -24,10 +24,10 @@ public class Service01Stack extends Stack {
                 .serviceName("service01")
                 .cluster(cluster)
                 .cpu(256)
-                .memoryLimitMiB(128)
+                .memoryLimitMiB(512)
                 .taskImageOptions(
                         ApplicationLoadBalancedTaskImageOptions.builder()
-                                .image(ContainerImage.fromRegistry("nayronferreiradev/aws_course_project01:0.0.6-snapshot"))
+                                .image(ContainerImage.fromRegistry("nayronferreiradev/aws_course_project01:0.0.8-snapshot"))
                                 .containerName("aws_project01")
                                 .containerPort(8080)
                                 .logDriver(LogDriver.awsLogs(AwsLogDriverProps.builder()
