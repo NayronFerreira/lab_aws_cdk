@@ -1,9 +1,6 @@
 package com.myorg;
 
-import com.myorg.stacks.ClusterStack;
-import com.myorg.stacks.RdsStack;
-import com.myorg.stacks.Service01Stack;
-import com.myorg.stacks.VpcStack;
+import com.myorg.stacks.*;
 import software.amazon.awscdk.App;
 
 public class LabAwsCdkApp {
@@ -18,9 +15,12 @@ public class LabAwsCdkApp {
         RdsStack rds = new RdsStack(app, "Rds", vpc.getVpc());
         rds.addDependency(vpc);
 
-        Service01Stack service01 = new Service01Stack(app, "Service01", cluster.getCluster());
+        SnsStack sns = new SnsStack(app, "Sns");
+
+        Service01Stack service01 = new Service01Stack(app, "Service01", cluster.getCluster(), sns.getProductEventsTopic());
         service01.addDependency(cluster);
         service01.addDependency(rds);
+        service01.addDependency(sns);
 
         app.synth();
     }
