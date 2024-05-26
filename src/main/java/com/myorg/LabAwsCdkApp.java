@@ -22,6 +22,10 @@ public class LabAwsCdkApp {
         service01.addDependency(rds);
         service01.addDependency(sns);
 
+        Service02Stack service02 = new Service02Stack(app, "Service02", cluster.getCluster(), sns.getProductEventsTopic());
+        service02.addDependency(cluster);
+        service02.addDependency(sns);
+
         app.synth();
     }
 }
