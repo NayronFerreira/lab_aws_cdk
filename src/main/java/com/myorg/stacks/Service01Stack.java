@@ -68,6 +68,12 @@ public class Service01Stack extends Stack {
                 .scaleOutCooldown(Duration.seconds(60))
                 .build());
 
+        scalableTaskCount.scaleOnMemoryUtilization("MemoryScaling", MemoryUtilizationScalingProps.builder()
+                .targetUtilizationPercent(50)
+                .scaleInCooldown(Duration.seconds(60))
+                .scaleOutCooldown(Duration.seconds(60))
+                .build());
+
         productEventsTopic.getTopic().grantPublish(service01.getTaskDefinition().getTaskRole());
     }
 }
